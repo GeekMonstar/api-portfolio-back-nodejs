@@ -1,34 +1,39 @@
 import { Request, Response } from "express";
 import SubprojectModel from "../models/subproject.model";
 import languageTranslation from "../tools/languageTranslation";
+import ProjectModel from "../models/project.model";
 
 export async function createSubproject(req: Request, res: Response) {
   const {
     project_id,
-    title,
+    fr_title,
     stack,
     fr_description,
-    languages,
-    image,
+    skills,
     url,
     git_repo_url,
   } = req.body;
+  const title = await languageTranslation(fr_title);
   const description = await languageTranslation(fr_description);
   try {
-    const subproject = await SubprojectModel.create({
-      project_id,
-      title,
-      stack,
-      description,
-      languages,
-      image,
-      url,
-      git_repo_url,
-    });
-    if (subproject) {
-      res.status(200).json(subproject);
+    const project = await ProjectModel.findById(project_id);
+    if (project) {
+      const subproject = await SubprojectModel.create({
+        project_id,
+        title,
+        stack,
+        description,
+        skills,
+        url,
+        git_repo_url,
+      });
+      if (subproject) {
+        res.status(200).json(subproject);
+      } else {
+        res.status(400).json(subproject);
+      }
     } else {
-      res.status(400).json(subproject);
+      res.status(400).send("L'denfient du projet est incorrecte");
     }
   } catch (err) {
     res.status(400).json(err);

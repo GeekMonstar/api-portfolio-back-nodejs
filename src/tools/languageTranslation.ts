@@ -1,6 +1,6 @@
 const translate = require("translate-google");
 
-const languageToTranslate = ["en", "es", "de"];
+// const languageToTranslate = ["en", "es", "de"];
 
 export default async function languageTranslation(fr: string) {
   let objectLanguage: ObjectLanguage = {

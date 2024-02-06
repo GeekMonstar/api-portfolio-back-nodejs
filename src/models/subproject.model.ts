@@ -7,7 +7,7 @@ const subprojectSchema = new Schema({
     require: true,
   },
   title: {
-    type: String,
+    type: languagesSchema,
     require: true,
   },
   description: {
@@ -17,7 +17,7 @@ const subprojectSchema = new Schema({
   stack: {
     type: String,
   },
-  languages: {
+  skills: {
     type: [String],
     require: true,
   },

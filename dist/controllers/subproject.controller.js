@@ -42,30 +42,37 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getSubprojectById = exports.getAllSubprojects = exports.createSubproject = void 0;
 var subproject_model_1 = __importDefault(require("../models/subproject.model"));
 var languageTranslation_1 = __importDefault(require("../tools/languageTranslation"));
+var project_model_1 = __importDefault(require("../models/project.model"));
 function createSubproject(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, project_id, title, stack, fr_description, languages, image, url, git_repo_url, description, subproject, err_1;
+        var _a, project_id, fr_title, stack, fr_description, skills, url, git_repo_url, title, description, project, subproject, err_1;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
-                    _a = req.body, project_id = _a.project_id, title = _a.title, stack = _a.stack, fr_description = _a.fr_description, languages = _a.languages, image = _a.image, url = _a.url, git_repo_url = _a.git_repo_url;
-                    return [4 /*yield*/, (0, languageTranslation_1.default)(fr_description)];
+                    _a = req.body, project_id = _a.project_id, fr_title = _a.fr_title, stack = _a.stack, fr_description = _a.fr_description, skills = _a.skills, url = _a.url, git_repo_url = _a.git_repo_url;
+                    return [4 /*yield*/, (0, languageTranslation_1.default)(fr_title)];
                 case 1:
-                    description = _b.sent();
-                    _b.label = 2;
+                    title = _b.sent();
+                    return [4 /*yield*/, (0, languageTranslation_1.default)(fr_description)];
                 case 2:
-                    _b.trys.push([2, 4, , 5]);
+                    description = _b.sent();
+                    _b.label = 3;
+                case 3:
+                    _b.trys.push([3, 8, , 9]);
+                    return [4 /*yield*/, project_model_1.default.findById(project_id)];
+                case 4:
+                    project = _b.sent();
+                    if (!project) return [3 /*break*/, 6];
                     return [4 /*yield*/, subproject_model_1.default.create({
                             project_id: project_id,
                             title: title,
                             stack: stack,
                             description: description,
-                            languages: languages,
-                            image: image,
+                            skills: skills,
                             url: url,
                             git_repo_url: git_repo_url,
                         })];
-                case 3:
+                case 5:
                     subproject = _b.sent();
                     if (subproject) {
                         res.status(200).json(subproject);
@@ -73,12 +80,16 @@ function createSubproject(req, res) {
                     else {
                         res.status(400).json(subproject);
                     }
-                    return [3 /*break*/, 5];
-                case 4:
+                    return [3 /*break*/, 7];
+                case 6:
+                    res.status(400).send("L'denfient du projet est incorrecte");
+                    _b.label = 7;
+                case 7: return [3 /*break*/, 9];
+                case 8:
                     err_1 = _b.sent();
                     res.status(400).json(err_1);
-                    return [3 /*break*/, 5];
-                case 5: return [2 /*return*/];
+                    return [3 /*break*/, 9];
+                case 9: return [2 /*return*/];
             }
         });
     });

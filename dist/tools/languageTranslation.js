@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var translate = require("translate-google");
-var languageToTranslate = ["en", "es", "de"];
+// const languageToTranslate = ["en", "es", "de"];
 function languageTranslation(fr) {
     return __awaiter(this, void 0, void 0, function () {
         var objectLanguage, _a, _b, _c, _i, language, _d, _e;

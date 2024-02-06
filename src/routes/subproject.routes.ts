@@ -11,27 +11,11 @@ import {
   getSubprojectById,
 } from "../controllers/subproject.controller";
 
-const projectRouter = Router();
-let newFileName = "";
+const subprojectRouter = Router();
 
-const storage = diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "static/images/profile");
-  },
-  filename: (req, file, cb) => {
-    newFileName = `${Date.now()}-${file.originalname}`;
-    cb(null, newFileName);
-  },
-});
-
-const upload = multer({ storage });
-
-projectRouter
-  .post("/", upload.single("image"), (req, res) => {
-    console.log(newFileName);
-    uploadImage(req, res, createSubproject, newFileName);
-  })
+subprojectRouter
+  .post("/", createSubproject)
   .get("/", getAllSubprojects)
   .get("/:id", getSubprojectById);
 
-export default projectRouter;
+export default subprojectRouter;

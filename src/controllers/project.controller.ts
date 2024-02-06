@@ -11,7 +11,7 @@ export async function createProject(
     const { fr_title, fr_description, skills } = req.body;
     const title = await languageTranslation(fr_title);
     const description = await languageTranslation(fr_description);
-    const skillArray = skills.split(",");
+    const skillArray = typeof skills == "string" ? skills.split(",") : skills;
     const project = await ProjectModel.create({
       title,
       image: newFileName,

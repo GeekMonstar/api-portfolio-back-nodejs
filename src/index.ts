@@ -9,6 +9,7 @@ import projectRouter from "./routes/project.routes";
 import db_connexion from "./config/db";
 import profileRouter from "./routes/profile.routes";
 import authRouter from "./routes/auth.routes";
+import subprojectRouter from "./routes/subproject.routes";
 
 const app = express();
 
@@ -24,6 +25,7 @@ app
   .use("/description", [descriptionRouter])
   .use("/skills", [skillRouter])
   .use("/projects", [projectRouter])
+  .use("/subprojects", [subprojectRouter])
   .use("/profile", profileRouter)
   .listen(process.env.PORT, () => {
     console.log(`server is running on ${process.env.PORT}`);

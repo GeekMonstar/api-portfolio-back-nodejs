@@ -56,7 +56,7 @@ function createProject(req, res, newFileName) {
                     return [4 /*yield*/, (0, languageTranslation_1.default)(fr_description)];
                 case 2:
                     description = _b.sent();
-                    skillArray = skills.split(",");
+                    skillArray = typeof skills == "string" ? skills.split(",") : skills;
                     return [4 /*yield*/, project_model_1.default.create({
                             title: title,
                             image: newFileName,

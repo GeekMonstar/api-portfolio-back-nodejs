@@ -8,7 +8,7 @@ var subprojectSchema = new mongoose_1.Schema({
         require: true,
     },
     title: {
-        type: String,
+        type: schema_1.languagesSchema,
         require: true,
     },
     description: {
@@ -18,7 +18,7 @@ var subprojectSchema = new mongoose_1.Schema({
     stack: {
         type: String,
     },
-    languages: {
+    skills: {
         type: [String],
         require: true,
     },
