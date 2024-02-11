@@ -3,8 +3,10 @@ import multer, { diskStorage } from "multer";
 import {
   createProject,
   deleteProject,
+  descriptionUpdating,
   getAllProjects,
   getProjectById,
+  titleUpdating,
 } from "../controllers/project.controller";
 import { uploadImage } from "../middlewares/upload.middleware";
 
@@ -30,6 +32,8 @@ projectRouter
   })
   .get("/", getAllProjects)
   .get("/:id", getProjectById)
+  .put("/title/:id", titleUpdating)
+  .put("/description/:id", descriptionUpdating)
   .delete("/:id", deleteProject);
 
 export default projectRouter;

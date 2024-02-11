@@ -55,6 +55,38 @@ export async function getProjectById(req: Request, res: Response) {
   }
 }
 
+export async function titleUpdating(req: Request, res: Response) {
+  const { fr_title } = req.body;
+  const { id } = req.params;
+  try {
+    const title = await languageTranslation(fr_title);
+    const project = await ProjectModel.findByIdAndUpdate(id, { title });
+    if (project) {
+      res.status(200).json(project);
+    } else {
+      res.status(400);
+    }
+  } catch (err) {
+    res.status(400).json(err);
+  }
+}
+
+export async function descriptionUpdating(req: Request, res: Response) {
+  const { fr_description } = req.body;
+  const { id } = req.params;
+  try {
+    const description = await languageTranslation(fr_description);
+    const project = await ProjectModel.findByIdAndUpdate(id, { description });
+    if (project) {
+      res.status(200).json(project);
+    } else {
+      res.status(400).send("error");
+    }
+  } catch (err) {
+    res.status(400).json("error");
+  }
+}
+
 export async function deleteProject(req: Request, res: Response) {
   const { id } = req.params;
   try {

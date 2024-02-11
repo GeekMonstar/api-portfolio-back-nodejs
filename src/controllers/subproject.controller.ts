@@ -53,10 +53,28 @@ export async function getAllSubprojects(req: Request, res: Response) {
   }
 }
 
+export async function getAllSubprojectsByProjectId(
+  req: Request,
+  res: Response
+) {
+  const { project_id } = req.params;
+  try {
+    const subprojects = await SubprojectModel.find({ project_id });
+    if (subprojects) {
+      res.status(200).json(subprojects);
+    } else {
+      res.status(400).json(subprojects);
+    }
+  } catch (err) {
+    res.status(400).json(err);
+  }
+}
+
 export async function getSubprojectById(req: Request, res: Response) {
   const { id } = req.params;
   try {
     const subproject = await SubprojectModel.findById(id);
+    console.log(subproject);
     if (subproject) {
       res.status(200).json(subproject);
     } else {

@@ -46,5 +46,7 @@ projectRouter
 })
     .get("/", project_controller_1.getAllProjects)
     .get("/:id", project_controller_1.getProjectById)
+    .put("/title/:id", project_controller_1.titleUpdating)
+    .put("/description/:id", project_controller_1.descriptionUpdating)
     .delete("/:id", project_controller_1.deleteProject);
 exports.default = projectRouter;

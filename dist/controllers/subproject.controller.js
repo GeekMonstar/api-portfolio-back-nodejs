@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getSubprojectById = exports.getAllSubprojects = exports.createSubproject = void 0;
+exports.getSubprojectById = exports.getAllSubprojectsByProjectId = exports.getAllSubprojects = exports.createSubproject = void 0;
 var subproject_model_1 = __importDefault(require("../models/subproject.model"));
 var languageTranslation_1 = __importDefault(require("../tools/languageTranslation"));
 var project_model_1 = __importDefault(require("../models/project.model"));
@@ -122,9 +122,39 @@ function getAllSubprojects(req, res) {
     });
 }
 exports.getAllSubprojects = getAllSubprojects;
+function getAllSubprojectsByProjectId(req, res) {
+    return __awaiter(this, void 0, void 0, function () {
+        var project_id, subprojects, err_3;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    project_id = req.params.project_id;
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 3, , 4]);
+                    return [4 /*yield*/, subproject_model_1.default.find({ project_id: project_id })];
+                case 2:
+                    subprojects = _a.sent();
+                    if (subprojects) {
+                        res.status(200).json(subprojects);
+                    }
+                    else {
+                        res.status(400).json(subprojects);
+                    }
+                    return [3 /*break*/, 4];
+                case 3:
+                    err_3 = _a.sent();
+                    res.status(400).json(err_3);
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
+            }
+        });
+    });
+}
+exports.getAllSubprojectsByProjectId = getAllSubprojectsByProjectId;
 function getSubprojectById(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var id, subproject, err_3;
+        var id, subproject, err_4;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -135,6 +165,7 @@ function getSubprojectById(req, res) {
                     return [4 /*yield*/, subproject_model_1.default.findById(id)];
                 case 2:
                     subproject = _a.sent();
+                    console.log(subproject);
                     if (subproject) {
                         res.status(200).json(subproject);
                     }
@@ -143,8 +174,8 @@ function getSubprojectById(req, res) {
                     }
                     return [3 /*break*/, 4];
                 case 3:
-                    err_3 = _a.sent();
-                    res.status(400).json(err_3);
+                    err_4 = _a.sent();
+                    res.status(400).json(err_4);
                     return [3 /*break*/, 4];
                 case 4: return [2 /*return*/];
             }

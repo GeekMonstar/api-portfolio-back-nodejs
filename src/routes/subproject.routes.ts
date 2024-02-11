@@ -8,6 +8,7 @@ import { uploadImage } from "../middlewares/upload.middleware";
 import {
   createSubproject,
   getAllSubprojects,
+  getAllSubprojectsByProjectId,
   getSubprojectById,
 } from "../controllers/subproject.controller";
 
@@ -16,6 +17,7 @@ const subprojectRouter = Router();
 subprojectRouter
   .post("/", createSubproject)
   .get("/", getAllSubprojects)
-  .get("/:id", getSubprojectById);
+  .get("/:id", getSubprojectById)
+  .get("/project/:project_id", getAllSubprojectsByProjectId);
 
 export default subprojectRouter;

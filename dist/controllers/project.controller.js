@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteProject = exports.getProjectById = exports.getAllProjects = exports.createProject = void 0;
+exports.deleteProject = exports.descriptionUpdating = exports.titleUpdating = exports.getProjectById = exports.getAllProjects = exports.createProject = void 0;
 var project_model_1 = __importDefault(require("../models/project.model"));
 var languageTranslation_1 = __importDefault(require("../tools/languageTranslation"));
 function createProject(req, res, newFileName) {
@@ -137,9 +137,77 @@ function getProjectById(req, res) {
     });
 }
 exports.getProjectById = getProjectById;
+function titleUpdating(req, res) {
+    return __awaiter(this, void 0, void 0, function () {
+        var fr_title, id, title, project, err_4;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    fr_title = req.body.fr_title;
+                    id = req.params.id;
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 4, , 5]);
+                    return [4 /*yield*/, (0, languageTranslation_1.default)(fr_title)];
+                case 2:
+                    title = _a.sent();
+                    return [4 /*yield*/, project_model_1.default.findByIdAndUpdate(id, { title: title })];
+                case 3:
+                    project = _a.sent();
+                    if (project) {
+                        res.status(200).json(project);
+                    }
+                    else {
+                        res.status(400);
+                    }
+                    return [3 /*break*/, 5];
+                case 4:
+                    err_4 = _a.sent();
+                    res.status(400).json(err_4);
+                    return [3 /*break*/, 5];
+                case 5: return [2 /*return*/];
+            }
+        });
+    });
+}
+exports.titleUpdating = titleUpdating;
+function descriptionUpdating(req, res) {
+    return __awaiter(this, void 0, void 0, function () {
+        var fr_description, id, description, project, err_5;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    fr_description = req.body.fr_description;
+                    id = req.params.id;
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 4, , 5]);
+                    return [4 /*yield*/, (0, languageTranslation_1.default)(fr_description)];
+                case 2:
+                    description = _a.sent();
+                    return [4 /*yield*/, project_model_1.default.findByIdAndUpdate(id, { description: description })];
+                case 3:
+                    project = _a.sent();
+                    if (project) {
+                        res.status(200).json(project);
+                    }
+                    else {
+                        res.status(400).send("error");
+                    }
+                    return [3 /*break*/, 5];
+                case 4:
+                    err_5 = _a.sent();
+                    res.status(400).json("error");
+                    return [3 /*break*/, 5];
+                case 5: return [2 /*return*/];
+            }
+        });
+    });
+}
+exports.descriptionUpdating = descriptionUpdating;
 function deleteProject(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var id, project, err_4;
+        var id, project, err_6;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -158,8 +226,8 @@ function deleteProject(req, res) {
                     }
                     return [3 /*break*/, 4];
                 case 3:
-                    err_4 = _a.sent();
-                    res.status(400).json(err_4);
+                    err_6 = _a.sent();
+                    res.status(400).json(err_6);
                     return [3 /*break*/, 4];
                 case 4: return [2 /*return*/];
             }

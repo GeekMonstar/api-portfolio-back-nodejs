@@ -6,5 +6,6 @@ var subprojectRouter = (0, express_1.Router)();
 subprojectRouter
     .post("/", subproject_controller_1.createSubproject)
     .get("/", subproject_controller_1.getAllSubprojects)
-    .get("/:id", subproject_controller_1.getSubprojectById);
+    .get("/:id", subproject_controller_1.getSubprojectById)
+    .get("/project/:project_id", subproject_controller_1.getAllSubprojectsByProjectId);
 exports.default = subprojectRouter;
